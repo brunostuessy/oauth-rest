@@ -7,7 +7,7 @@
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8081:8081 springboot/sample-demo
+# docker run -i --rm -p 8083:8083 springboot/sample-demo
 #
 # If you want to include the debug port into your docker image
 # you will have to expose the debug port (default 5005 being the default) like this :  EXPOSE 8080 5005.
@@ -16,7 +16,7 @@
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8081:8081 springboot/sample-demo
+# docker run -i --rm -p 8083:8083 springboot/sample-demo
 #
 # This image uses the `run-java.sh` script to run the application.
 # This script computes the command line to execute the Java application.
@@ -55,7 +55,7 @@ FROM registry.access.redhat.com/ubi8/openjdk-21-runtime:1.20-2.1730773767
 COPY --from=builder --chmod=755 /home/jboss/project/run-java.sh /deployments/run-java.sh
 COPY --from=builder /home/jboss/project/target/spring-boot-app.jar /deployments/spring-boot-app.jar
 
-EXPOSE 8081
+EXPOSE 8083
 
 RUN cat /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
 
@@ -67,4 +67,4 @@ ENV JAVA_OPTS_APPEND=""
 ENV JAVA_APP_DIR="/deployments"
 ENV JAVA_APP_JAR="/deployments/spring-boot-app.jar"
 
-ENTRYPOINT ["/deployments/run-java.sh", "--server.port=8081"]
+ENTRYPOINT ["/deployments/run-java.sh"]
