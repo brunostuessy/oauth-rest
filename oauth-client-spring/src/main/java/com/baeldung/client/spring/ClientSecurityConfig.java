@@ -20,7 +20,9 @@ public class ClientSecurityConfig {
         		.anyRequest().authenticated())
             .oauth2Login()
             .and()
-            .logout().logoutSuccessUrl("/");
+            .logout()
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/");
         return http.build();
     }// @formatter:on
 
